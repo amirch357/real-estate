@@ -91,6 +91,7 @@ const BlogDetail = () => {
                               dangerouslySetInnerHTML={{
                                 __html: blog.description,
                               }}
+                              className="blog_content"
                             ></div>
                           </div>
                         </div>

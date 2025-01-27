@@ -15265,3 +15265,53 @@ fieldset.phone::after{
   color: #ffffff;
 }
 
+
+
+
+.wg-blog {
+  display: flex;
+  flex-direction: column; 
+  height: 100%; 
+  border: 1px solid var(--Border);
+}
+
+.wg-blog .image {
+  height: 220px;
+}
+.sub-blog {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.sub-blog div {
+  font-size: 12px;
+}
+
+.sub-blog div:not(:last-child)::after {
+  content: none;
+}
+
+.wg-blog .content {
+  padding: 10px;
+  border: none !important;
+  text-align: start;
+}
+.wg-blog .image {
+  overflow: hidden;
+}
+.sub-blog div {
+  font-size: 13px;
+}
+.wg-blog .content .name {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.wg-blog:hover {
+  box-shadow: 0px 6px 15px 0px rgba(110, 110, 110, 0.73);
+}
+
+.blog_content *{
+    all: revert;
+}

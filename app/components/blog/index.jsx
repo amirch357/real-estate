@@ -73,7 +73,7 @@ const BlogComponent = () => {
     fetchCategories(url.CATEGORIES, setCategories);
   }, [url, pageQuery, categoryQuery, searchQuery]);
 
-  function truncate(text, wordLimit = 20) {
+  function truncate(text, wordLimit = 10) {
     const words = text.split(" ");
     if (words.length > wordLimit) {
       return words.slice(0, wordLimit).join(" ") + "...";
@@ -138,14 +138,60 @@ const BlogComponent = () => {
             <div className="cl-container">
               <div className="row">
                 <div className="col-lg-8">
-                  {loading ? (
+                {loading ? (
+  <Loader />
+) : blogs.length > 0 ? (
+  <div className="row wow fadeInUp">
+    {blogs.map((blog) => (
+      <div className="col-xl-4 col-md-6 col-12" key={blog.id}>
+        <div
+          className="wg-blog wow fadeInUp animated"
+          style={{ visibility: "visible", animationName: "fadeInUp", height: '100% !important' }}
+        >
+          <div className="image">
+            <img
+              src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg"}
+              alt={blog.title}
+            />
+          </div>
+          <div className="content">
+            <div className="sub-blog">
+              <div>{blog.category.title}</div>
+              <div>
+                {new Intl.DateTimeFormat("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }).format(new Date(blog.publish_date))}
+                
+              </div>
+            </div>
+            <div className="name">
+              <a href={`/blog/${blog.slug}`}>{blog.title}</a>
+            </div>
+            <div>
+            <p>{truncate(blog.meta_description)}</p>
+            </div>
+            <a href={`/blog/${blog.slug}`} className="tf-button-no-bg">
+              Read More
+              <i className="icon-arrow-right-add"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <NotFound message="We couldn't find anything matching your category. Please try again with a different category." />
+)}
+
+                  
+                  
+                  {/* {loading ? (
                     <Loader />
                   ) : blogs.length > 0 ? (
                     blogs.map((blog) => (
-                      <div
-                        className="wg-blog style-row wow fadeInUp"
-                        key={blog.id}
-                      >
+                      <div className="wg-blog style-row wow fadeInUp" key={blog.id} >
                         <div className="image">
                           <img src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg" } alt={blog.title} />
                         </div>
@@ -180,40 +226,7 @@ const BlogComponent = () => {
                   ) : (
 
                     <NotFound message="We couldn't find anything matching your category. Please try again with different category." />
-                    // <div className="wg-blog style-row wow fadeInUp">
-                    //   <div className="image">
-                    //     <img
-                    //       src="/assets/images/blog/blog-list-1.jpg"
-                    //       alt=""
-                    //     />
-                    //   </div>
-                    //   <div className="content">
-                    //     <div className="sub-blog">
-                    //       <div>Tips &amp; Tricks</div>
-                    //       <div>April 26, 2024</div>
-                    //     </div>
-                    //     <div className="name">
-                    //       <Link href="/blog/thi-is-new">
-                    //         Chip and Joanna Gaines’ Latest Fixer-Upper Is Open
-                    //         for Visitors
-                    //       </Link>
-                    //     </div>
-                    //     <p>
-                    //       Lorem ipsum dolor sit amet, consectetur adipiscing
-                    //       elit. Duis mollis et sem sed sollicitudin. Donec non
-                    //       odio neque. Aliquam hendrerit sollicitudin purus, quis
-                    //       rutrum mi accumsan nec.{" "}
-                    //     </p>
-                    //     <Link
-                    //       href="/blog/thi-is-new"
-                    //       className="tf-button-no-bg"
-                    //     >
-                    //       Read More
-                    //       <i className="icon-arrow-right-add" />
-                    //     </Link>
-                    //   </div>
-                    // </div>
-                  )}
+                  )} */}
                   {/* Pagination */}
                   {pagination.totalPages > 1 && (
                     <ul
