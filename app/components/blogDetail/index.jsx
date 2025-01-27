@@ -64,7 +64,10 @@ const BlogDetail = () => {
                 {loading ? (
                   <Loader />
                 ) : (
-                  <>
+                  blog === null ? 
+                  <NotFound message="We couldn't find any post." />
+                    :
+                    <>
                     <div className="image-head">
                       <img src={blog.featured_image} alt={blog.title} />
                     </div>
