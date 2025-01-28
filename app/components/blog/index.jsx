@@ -13,13 +13,14 @@ const BlogComponent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const categoryQuery = searchParams.get("category");
-  const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("search") || ""
+  );
   const pageQuery = searchParams.get("page");
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
-
 
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -91,7 +92,6 @@ const BlogComponent = () => {
     }
   };
 
-
   useEffect(() => {
     // Sync the searchQuery state with the search parameter in the URL on mount
     setSearchQuery(searchParams.get("search") || "");
@@ -104,10 +104,14 @@ const BlogComponent = () => {
     if (newValue !== searchQuery) {
       setSearchQuery(newValue);
       const newQuery = { ...searchParams, search: newValue };
-      router.push({
-        pathname: router.pathname,
-        query: newQuery,
-      }, undefined, { shallow: true });
+      router.push(
+        {
+          pathname: router.pathname,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true }
+      );
     }
   };
 
@@ -138,96 +142,45 @@ const BlogComponent = () => {
             <div className="cl-container">
               <div className="row">
                 <div className="col-lg-8">
-                {loading ? (
-  <Loader />
-) : blogs.length > 0 ? (
-  <div className="row wow fadeInUp">
-    {blogs.map((blog) => (
-      <div className="col-xl-4 col-md-6 col-12" key={blog.id}>
-        <div
-          className="wg-blog wow fadeInUp animated"
-          style={{ visibility: "visible", animationName: "fadeInUp", height: '100% !important' }}
-        >
-          <div className="image">
-            <img
-              src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg"}
-              alt={blog.title}
-            />
-          </div>
-          <div className="content">
-            <div className="sub-blog">
-              <div>{blog.category.title}</div>
-              <div>
-                {new Intl.DateTimeFormat("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                }).format(new Date(blog.publish_date))}
-                
-              </div>
-            </div>
-            <div className="name">
-              <a href={`/blog/${blog.slug}`}>{blog.title}</a>
-            </div>
-            <div>
-            <p>{truncate(blog.meta_description)}</p>
-            </div>
-            <a href={`/blog/${blog.slug}`} className="tf-button-no-bg">
-              Read More
-              <i className="icon-arrow-right-add"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-) : (
-  <NotFound message="We couldn't find anything matching your category. Please try again with a different category." />
-)}
-
-                  
-                  
-                  {/* {loading ? (
+                  {loading ? (
                     <Loader />
                   ) : blogs.length > 0 ? (
-                    blogs.map((blog) => (
-                      <div className="wg-blog style-row wow fadeInUp" key={blog.id} >
-                        <div className="image">
-                          <img src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg" } alt={blog.title} />
-                        </div>
-                        <div className="content">
-                          <div className="sub-blog">
-                            <div>{blog.category.title}</div>
-                            <div>
-                              {" "}
-                              {new Intl.DateTimeFormat("en-US", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                              }).format(new Date(blog.publish_date))}
+                    <div className="row wow fadeInUp">
+                      {blogs.map((blog) => (
+                        <div className="col-xl-4 col-md-6 col-12 mb-20" key={blog.id} >
+                          <div className="wg-blog wow fadeInUp animated" style={{ visibility: "visible", animationName: "fadeInUp", height: "100% !important", }} >
+                            <div className="image">
+                              <img src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg" } alt={blog.title} />
+                            </div>
+                            <div className="content">
+                              <div className="sub-blog">
+                                <div>{blog.category.title}</div>
+                                <div>
+                                  {new Intl.DateTimeFormat("en-US", {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                  }).format(new Date(blog.publish_date))}
+                                </div>
+                              </div>
+                              <div className="name">
+                                <a href={`/blog/${blog.slug}`}>{blog.title}</a>
+                              </div>
+                              <div>
+                                <p>{truncate(blog.meta_description)}</p>
+                              </div> 
+                              <a href={`/blog/${blog.slug}`} className="tf-button-no-bg" >
+                                Read More
+                                <i className="icon-arrow-right-add"></i>
+                              </a>
                             </div>
                           </div>
-                          <div className="name">
-                            <Link href={`/blog/${blog.slug}`}>
-                              {blog.title}
-                            </Link>
-                          </div>
-                          <p>{truncate(blog.meta_description)}</p>
-                          <Link
-                            href={`/blog/${blog.slug}`}
-                            className="tf-button-no-bg"
-                          >
-                            Read More
-                            <i className="icon-arrow-right-add" />
-                          </Link>
                         </div>
-                      </div>
-                    ))
+                      ))}
+                    </div>
                   ) : (
-
-                    <NotFound message="We couldn't find anything matching your category. Please try again with different category." />
-                  )} */}
-                  {/* Pagination */}
+                    <NotFound message="We couldn't find anything matching your category. Please try again with a different category." />
+                  )}
                   {pagination.totalPages > 1 && (
                     <ul
                       className="wg-pagination justify-center wow fadeInUp"
@@ -314,6 +267,7 @@ const BlogComponent = () => {
                     </ul>
                   )}
                 </div>
+
                 <div className="col-lg-4">
                   <div className="sidebar">
                     <div className="sidebar-item sidebar-search">
