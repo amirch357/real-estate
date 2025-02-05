@@ -387,7 +387,7 @@ del,
 table,
 th,
 td {
-  border: 1px solid #343444;
+  border: 1px solid #3434;
 }
 
 table {
@@ -419,7 +419,9 @@ th,
 td {
   padding: 8px 12px;
 }
-
+.table > :not(:last-child) > :last-child > * {
+  border-bottom-color: #3434;
+}
 /* Media */
 embed,
 object,
@@ -10570,7 +10572,7 @@ body::-webkit-scrollbar {
 }
 .property-single-wrap .wrap-gallery-image {
   margin-bottom: 45px;
-  max-height: 620px;
+  min-height: 620px;
 }
 .property-single-wrap .head-title {
   display: -webkit-box;
@@ -11842,7 +11844,7 @@ body::-webkit-scrollbar {
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: var(--Text);
+  color:#FFF;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
@@ -11854,6 +11856,7 @@ body::-webkit-scrollbar {
 .widget-tabs.style-3 .widget-menu-tab .item-title.active {
   background-color: var(--White);
   box-shadow: 0px 6px 15px 0px rgba(64, 79, 104, 0.05);
+  color: #121D36;
 }
 .widget-tabs.style-4 .widget-menu-tab {
   display: -webkit-box;
