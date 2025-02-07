@@ -532,6 +532,11 @@ input[type=search]::-webkit-search-results-decoration {
   opacity: 1;
 }
 
+::placeholder {
+  color: #171412;
+  opacity: 0.31;
+}
+
 /* Since FF19 lowers the opacity of the placeholder by default */
 :-ms-input-placeholder {
   color: #171412;

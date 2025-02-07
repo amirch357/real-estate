@@ -147,7 +147,7 @@ const BlogComponent = () => {
                   ) : blogs.length > 0 ? (
                     <div className="row wow fadeInUp">
                       {blogs.map((blog) => (
-                        <div className="col-xl-4 col-md-6 col-12 mb-20" key={blog.id} >
+                        <div className="col-xl-4 col-md-6 col-12 mb-20" style={{paddingRight: '0px'}} key={blog.id} >
                           <div className="wg-blog wow fadeInUp animated" style={{ visibility: "visible", animationName: "fadeInUp", height: "100% !important", }} >
                             <div className="image">
                               <img src={blog.featured_image || "/assets/images/blog/blog-grid-1.jpg" } alt={blog.title} />
@@ -295,14 +295,14 @@ const BlogComponent = () => {
                       <ul>
                         {categories.map((category) => (
                           <li
-                            key={category.id}
+                            key={category.slug}
                             className={
-                              category.id === Number(categoryQuery)
+                              category.slug === categoryQuery
                                 ? "active"
                                 : ""
                             }
                           >
-                            <Link href={`?category=${category.id}`}>
+                            <Link href={`?category=${category.slug}`}>
                               {category.title}
                             </Link>
                           </li>
